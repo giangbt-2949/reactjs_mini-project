@@ -1,0 +1,26 @@
+@import '../../../sass/index.scss';
+
+.search-input {
+  width: 30%;
+  position: relative;
+
+  input {
+    padding: 6px 0px;
+    width: 100%;
+    outline: none;
+  }
+
+  button {
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: $search-btn;
+    height: 100%;
+    padding: 0 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+  }
+}
