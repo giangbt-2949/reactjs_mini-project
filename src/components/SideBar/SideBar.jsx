@@ -1,9 +1,14 @@
+import { useContext } from "react";
+import queryString from 'query-string';
+import Categories from "./Categories/Categories";
+
+import './styles.scss';
 
 const SideBar = () => {
   return (
-    <nav>
-      Side bar
-    </nav>
+    <div className="sidebar">
+      <Categories />
+    </div>
   )
 };
 

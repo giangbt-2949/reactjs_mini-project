@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import Pagination from "./Pagination/Pagination";
 import Product from "./Product/Product";
+import { ProductsContext } from "../../ProductsContext";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(16);
+  const productContext = useContext(ProductsContext);
+
+  console.log(productContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get('http://localhost:3000/products',
         {
-          params: {
-            _page: currentPage,
-            _limit: productsPerPage,
-          }
+          params: productContext.params
         }
       );
       const data = response.data;
@@ -25,7 +25,7 @@ const Products = () => {
     };
 
     fetchData();
-  }, [currentPage]);
+  }, [productContext]);
 
   console.log(products);
 
