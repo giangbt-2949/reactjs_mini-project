@@ -1,0 +1,39 @@
+@import '../../../sass/index.scss';
+
+.pagination {
+  @include flexBox(row, center, center);
+  height: 50px;
+  background-color: $gray-color;
+  margin: 0 10px;
+
+  ul {
+    @include flexBox(row, center, center);
+
+    li {
+      margin: 0 8px;
+
+      i {
+        color: $secondary-color!important;
+      }
+
+      a {
+        cursor: pointer;
+        color: $secondary-color!important;
+        font-size: $fs-lg;
+      }
+    }
+  }
+
+  .page-active {
+    color: $black-color!important;
+    font-weight: bold;
+  }
+
+  .fa-chevron-left {
+    margin-right: 5px;
+  }
+
+  .fa-chevron-right {
+    margin-left: 5px;
+  }
+}

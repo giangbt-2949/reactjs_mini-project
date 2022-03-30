@@ -7,7 +7,7 @@ const SearchForm = () => {
   return (
     <form className="search-input">
       <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
-      <button type='button'><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button type='submit'><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
   )
 };

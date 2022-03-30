@@ -1,0 +1,35 @@
+@import '../../../sass/index.scss';
+
+.product-card {
+  border: solid 1px #eee;
+  height: 400px;
+  padding: 10px 10px;
+  margin: 10px 10px;
+
+  &__img {
+    @include flexBox(row, center, center);
+    height: 250px;
+
+    img {
+     width: 20%
+    }
+  }
+
+  &__name {
+    font-weight: bold;
+    padding: 0 10px;
+    margin-bottom: 20px
+  }
+
+  &__info {
+    @include flexBox(row, center, space-between);
+
+    div {
+      @include flexBox(row, center, flex-start);
+    }
+
+    h5 {
+      font-weight: bold;
+    }
+  }
+}
