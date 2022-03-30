@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductsContext } from "../../../ProductsContext";
 
 import './styles.scss';
 
-const Pagination = ({ setCurrentPage, currentPage }) => {
+const Pagination = () => {
   const [limitPageNum, setLimitPageNum] = useState(6);
+  const productContext = useContext(ProductsContext);
 
   const handleNextPage = () => {
-    setCurrentPage(prevPage => prevPage + 1);
+    productContext.setCurrentPage(prevPage => prevPage + 1);
+    productContext.productDispatch({type: 'CHANGE_PAGE', payload: productContext.currentPage + 1})
   };
 
   const handlePrevPage = () => {
-    setCurrentPage(prevPage => prevPage - 1);
+    if(productContext.currentPage > 1) {
+      productContext.setCurrentPage(prevPage => prevPage - 1);
+      productContext.productDispatch({type: 'CHANGE_PAGE', payload: productContext.currentPage - 1})
+    }
   };
 
   return (
@@ -20,9 +26,12 @@ const Pagination = ({ setCurrentPage, currentPage }) => {
           <i class="fa-solid fa-chevron-left"></i>
           <a onClick={handlePrevPage}>Previous page</a>
         </li>
-        {[...Array(currentPage + limitPageNum).keys()].slice(currentPage).map(page => (
+        {[...Array(productContext.currentPage + limitPageNum).keys()].slice(productContext.currentPage).map(page => (
           <li key={page}>
-            <a onClick={() => setCurrentPage(page)} className={page === currentPage ? "page-active" : ""}>{page}</a>
+            <a onClick={() => {
+              productContext.productDispatch({type: 'CHANGE_PAGE', payload: page  });
+              productContext.setCurrentPage(page);
+            }} className={page === productContext.currentPage ? "page-active" : ""}>{page}</a>
           </li>
         ))}
         <li>
