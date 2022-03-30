@@ -1,0 +1,17 @@
+@import '../../sass/index.scss';
+
+.navbar {
+  @include flexBox(row, center, flex-start);
+  padding: 10px 15px;
+  background-color: $primary-color;
+
+  &__img {
+    width: 2%;
+  }
+
+  h3 {
+    color: $white-color;
+    font-size: $fs-xl;
+    margin: 0 10px;
+  }
+}
