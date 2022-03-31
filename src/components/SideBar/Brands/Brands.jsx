@@ -7,13 +7,13 @@ import CheckBox from "../CheckBox/CheckBox";
 const Brands = () => {
   const productContext = useContext(ProductsContext);
 
-  const productBrands = new Set(productContext.products.map(product => product.brand));
+  const productBrands = [...new Set(productContext.state.products.map(product => product.brand))];
   console.log(productBrands);
 
   return (
     <div className="brand">
       <Heading text='Brand' />
-      {[...productBrands].map((brand, index) => <CheckBox text={brand} key={index} params='brand' />)}
+      {productBrands.map((brand, index) => <CheckBox text={brand} key={index} params='brand' />)}
     </div>  
   )
 };

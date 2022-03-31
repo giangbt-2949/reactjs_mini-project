@@ -8,12 +8,12 @@ import { ProductsContext } from "../../../ProductsContext";
 const Types = () => {
   const productContext = useContext(ProductsContext);
 
-  const productTypes = new Set(productContext.products.map(product => product.type));
+  const productTypes = [...new Set(productContext.state.products.map(product => product.type))];
 
   return (
     <div className="types">
       <Heading text='Type' />
-      {[...productTypes].map((type, index) => <CheckBox text={type} key={index} params='type' />)}
+      {productTypes.map((type, index) => <CheckBox text={type} key={index} params='type' />)}
     </div>
   )
 };

@@ -2,6 +2,8 @@
 
 .sidebar-wrapper {
   padding: 3px 20px;
+  display: block;
+  color: $black-color;
 
   .sidebar-item {
     font-size: $fs-sm;

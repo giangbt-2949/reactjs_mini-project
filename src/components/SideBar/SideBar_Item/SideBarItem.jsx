@@ -3,16 +3,17 @@ import './styles.scss';
 import { ProductsContext } from '../../../ProductsContext';
 
 const SideBarItem = ({ item }) => {
-  const [isOpen, setIsOpen] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const productContext = useContext(ProductsContext);
 
   if(item.childrens) {
     return (
-      <div className="sidebar-wrapper" >
-        <li className={item.title === productContext.currentLink ? "sidebar-item sidebar-active" : "sidebar-item"}  onClick={() => {
+      <a className="sidebar-wrapper" >
+        <li className={item.title === productContext.state.currentLink ? "sidebar-item sidebar-active" : "sidebar-item"}  onClick={() => {
           setIsOpen(true);
-          productContext.setCurrentLink(prev => prev = item.title);
-          productContext.productDispatch({type: 'CATEGORY', payload: {categories_like: item.title, _page: productContext.currentPage, _limit: productContext.productsPerPage}});
+          productContext.state.currentLink = item.title;
+          productContext.state.page = 1;
+          productContext.productDispatch({type: 'CATEGORY', payload: {categories_like: item.title, _page: 1, _limit: productContext.state.limit}});
         }}>
           <i class="fa-solid fa-chevron-right"></i>
           <span>{item.title}</span>
@@ -20,19 +21,20 @@ const SideBarItem = ({ item }) => {
         <ul className={isOpen ? 'sub-sidebar open' : 'sub-sidebar'}>
           {item.childrens.map((item, index) => <SideBarItem item={item} key={index} />)}
         </ul>
-      </div>
+      </a>
     )
   } else {
     return (
-      <div className="sidebar-wrapper" >
-        <li className={item.title === productContext.currentLink ? "sidebar-item sidebar-active" : "sidebar-item"}  onClick={() => {
-          productContext.setCurrentLink(prev => prev = item.title);
-          productContext.productDispatch({type: 'CATEGORY', payload: {categories_like: item.title, _page: productContext.currentPage, _limit: productContext.productsPerPage}});
+      <a className="sidebar-wrapper" >
+        <li className={item.title === productContext.state.currentLink ? "sidebar-item sidebar-active" : "sidebar-item"}  onClick={() => {
+          productContext.state.currentLink = item.title;
+          productContext.state.page = 1;
+          productContext.productDispatch({type: 'CATEGORY', payload: {categories_like: item.title, _page: 1, _limit: productContext.state.limit}});
         }}>
           <i class="fa-solid fa-chevron-right"></i>
           <span>{item.title}</span>
         </li>
-      </div>
+      </a>
     )
   }
 };
