@@ -3,7 +3,7 @@ import './styles.scss';
 import { ProductsContext } from '../../../ProductsContext';
 
 const SideBarItem = ({ item }) => {
-  const [isOpen, setIsOpen] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const productContext = useContext(ProductsContext);
 
   if(item.childrens) {
