@@ -3,6 +3,7 @@ import axios from 'axios';
 import Pagination from "./Pagination/Pagination";
 import Product from "./Product/Product";
 import { ProductsContext } from "../../ProductsContext";
+import SortPrice from "./SortPrice/SortPrice";
 
 const Products = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +11,7 @@ const Products = ({ products }) => {
 
   return (
     <div>
+      <SortPrice />
       <div className="d-flex flex-wrap">
         {products && products.map(product => (
           <div className="col-md-3" key={product.objectID} >

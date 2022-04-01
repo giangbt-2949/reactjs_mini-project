@@ -1,0 +1,10 @@
+@import '../../../../sass/index.scss';
+
+.price-link {
+  font-size: $fs-sm;
+
+  &:hover {
+    color: $hover-color;
+    cursor: pointer;
+  }
+}

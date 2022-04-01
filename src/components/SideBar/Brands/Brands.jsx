@@ -5,9 +5,9 @@ import { ProductsContext } from "../../../ProductsContext";
 import CheckBox from "../CheckBox/CheckBox";
 
 const Brands = () => {
-  const productContext = useContext(ProductsContext);
+  const { state } = useContext(ProductsContext);
 
-  const productBrands = [...new Set(productContext.state.products.map(product => product.brand))];
+  const productBrands = [...new Set(state.allProducts.map(product => product.brand))];
   console.log(productBrands);
 
   return (

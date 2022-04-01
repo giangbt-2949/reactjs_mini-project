@@ -6,9 +6,9 @@ import { types } from '../../../data/types';
 import { ProductsContext } from "../../../ProductsContext";
 
 const Types = () => {
-  const productContext = useContext(ProductsContext);
+  const { state } = useContext(ProductsContext);
 
-  const productTypes = [...new Set(productContext.state.products.map(product => product.type))];
+  const productTypes = [...new Set(state.allProducts.map(product => product.type))];
 
   return (
     <div className="types">

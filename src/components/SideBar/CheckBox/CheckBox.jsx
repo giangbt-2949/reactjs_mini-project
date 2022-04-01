@@ -3,12 +3,11 @@ import './styles.scss';
 import { ProductsContext } from '../../../ProductsContext';
 
 const CheckBox = ({ text, params }) => {
-  const productContext = useContext(ProductsContext);
+  const { state, dispatch } = useContext(ProductsContext);
 
   return (
     <div className="checkbox" onClick={() => {
-      productContext.state.page = 1;
-      productContext.productDispatch({type: 'TYPE', payload: {[params]: text, _page: 1, _limit: productContext.state.limit}});
+      dispatch({type: 'GET_TYPE', payload: {params, text}});
     }}>
       <input type='checkbox' id={text}></input>
       <label for={text}>{text}</label>

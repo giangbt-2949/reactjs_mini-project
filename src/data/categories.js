@@ -161,5 +161,62 @@ export const categories = [
         title: "Projector Mounts & Screens"
       }
     ]
+  },
+  {
+    title: "Cameras & Camcorders",
+    childrens: [
+      {
+        title: "Binoculars"
+      },
+      {
+        title: "Camcorder Accessories"
+      },
+      {
+        title: "Digital Cameras"
+      },
+      {
+        title: "Telescopes"
+      },
+      {
+        title: "Memory Cards"
+      }
+    ]
+  },
+  {
+    title: "Office & School Supplies",
+    childrens: [
+      {
+        title: "Binders, Folders & Filing"
+      },
+      {
+        title: "Organizers & Storage"
+      },
+      {
+        title: "Pens, Pencils & Markers"
+      },
+      {
+        title: "Printer Ink & Toner"
+      }
+    ]
+  },
+  {
+    title: "Video Games",
+    childrens: [
+      {
+        title: "PlayStation 4"
+      },
+      {
+        title: "Xbox 360"
+      },
+      {
+        title: "Video Game Accessories"
+      },
+      {
+        title: "PC Gaming"
+      },
+      {
+        title: "Game Guides"
+      }
+    ]
   }
 ]
