@@ -9,10 +9,6 @@
   &__img {
     @include flexBox(row, center, center);
     height: 250px;
-
-    img {
-     width: 20%
-    }
   }
 
   &__name {

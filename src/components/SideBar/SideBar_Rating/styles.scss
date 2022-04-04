@@ -1,0 +1,28 @@
+@import '../../../sass/index.scss';
+
+.sidebar-ratings {
+  padding: 0 20px;
+  margin: 20px 0;
+
+  .yellow-star {
+    font-size: $fs-sm;
+  }
+
+  .white-star {
+    font-size: $fs-sm;
+  }
+
+  div {
+    @include flexBox(row, center, flex-start);
+    cursor: pointer;
+
+    span {
+      margin-left: 5px;
+      font-size: $fs-sm;
+
+      &:hover {
+        color: $hover-color;
+      }
+    }
+  }
+}

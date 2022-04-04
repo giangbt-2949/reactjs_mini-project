@@ -1,31 +1,44 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Pagination from "./Pagination/Pagination";
 import Product from "./Product/Product";
+import { setProducts, setAllProducts } from "../../redux/slices/productSlice";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [totalProducts, setTotalProducts] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(16);
+
+  const { products, productParams } = useSelector(state => state.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:3000/products',
+      const { data } = await axios.get('http://localhost:3000/products',
         {
-          params: {
-            _page: currentPage,
-            _limit: productsPerPage,
-          }
+          params: productParams
         }
       );
-      const data = response.data;
-      setProducts(data);
-      setTotalProducts(response.headers['x-total-count']);
+      
+      dispatch(setProducts(data));
+    };
+
+    const fetchAllProducts = async () => {
+      const { data } = await axios.get('http://localhost:3000/products',
+      {
+        params: {
+          categories_like: productParams.categories_like,
+          _page: productParams._page,
+          _limit: productParams._limit,
+        }
+      }
+    );
+
+    dispatch(setAllProducts(data));
     };
 
     fetchData();
-  }, [currentPage]);
+    fetchAllProducts();
+  }, [productParams]);
 
   console.log(products);
 
