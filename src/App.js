@@ -40,7 +40,6 @@ function App() {
           }
         }
       );
-      console.log(data);
 
       dispatch({ type: 'GET_ALL_PRODUCTS', payload: data });
     };
