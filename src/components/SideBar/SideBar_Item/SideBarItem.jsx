@@ -9,6 +9,7 @@ const SideBarItem = ({ item }) => {
   const { currentLink } = useSelector(state => state.products);
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
   const handleSideBarItem = () => {
     setIsOpen(!isOpen);
     dispatch(filterByCategory(item.title));
@@ -19,6 +20,16 @@ const SideBarItem = ({ item }) => {
     return (
       <a className="sidebar-wrapper" >
         <li className={currentLink === item.title ? "sidebar-item sidebar-active" : "sidebar-item"}  onClick={handleSideBarItem}>
+=======
+  if(item.childrens) {
+    return (
+      <a className="sidebar-wrapper" >
+        <li className={currentLink === item.title ? "sidebar-item sidebar-active" : "sidebar-item"}  onClick={() => {
+          setIsOpen(!isOpen);
+          dispatch(filterByCategory(item.title));
+          dispatch(setCurrentLink(item.title));
+        }}>
+>>>>>>> 0b88355c5e30a31a22c6c653dfcc9639ca4528b2
           <i class="fa-solid fa-chevron-right"></i>
           <span>{item.title}</span>
         </li>
@@ -30,7 +41,14 @@ const SideBarItem = ({ item }) => {
   } else {
     return (
       <a className="sidebar-wrapper" >
+<<<<<<< HEAD
         <li className={currentLink === item.title ? "sidebar-item sidebar-active" : "sidebar-item"} onClick={handleSideBarItem}>
+=======
+        <li className={currentLink === item.title ? "sidebar-item sidebar-active" : "sidebar-item"} onClick={() => {
+          dispatch(filterByCategory(item.title));
+          dispatch(setCurrentLink(item.title));
+        }}>
+>>>>>>> 0b88355c5e30a31a22c6c653dfcc9639ca4528b2
           <i class="fa-solid fa-chevron-right"></i>
           <span>{item.title}</span>
         </li>
