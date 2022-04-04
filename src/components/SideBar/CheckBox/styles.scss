@@ -1,0 +1,21 @@
+@import '../../../sass/index.scss';
+
+.checkbox {
+  @include flexBox(row, center, flex-start);
+  margin: 5px 0;
+
+  input {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+  }
+
+  label {
+    font-size: $fs-sm;
+
+    &:hover {
+      color: $hover-color;
+      cursor: pointer;
+    }
+  }
+}

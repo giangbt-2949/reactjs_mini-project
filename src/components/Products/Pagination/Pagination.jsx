@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { ProductsContext } from "../../../ProductsContext";
+import PageLink from "./PageLink/PageLink";
 
 import './styles.scss';
 
-const Pagination = ({ setCurrentPage, currentPage }) => {
-  const [limitPageNum, setLimitPageNum] = useState(6);
+const Pagination = () => {
+  const { state, dispatch } = useContext(ProductsContext);
 
   const handleNextPage = () => {
-    setCurrentPage(prevPage => prevPage + 1);
+    dispatch({type: 'CHANGE_PAGE', payload: state.productParams._page + 1})
   };
 
   const handlePrevPage = () => {
-    setCurrentPage(prevPage => prevPage - 1);
+    if(state.productParams._page > 1) {
+      dispatch({type: 'CHANGE_PAGE', payload: state.productParams._page - 1})
+    }
   };
 
   return (
@@ -20,10 +24,8 @@ const Pagination = ({ setCurrentPage, currentPage }) => {
           <i class="fa-solid fa-chevron-left"></i>
           <a onClick={handlePrevPage}>Previous page</a>
         </li>
-        {[...Array(currentPage + limitPageNum).keys()].slice(currentPage).map(page => (
-          <li key={page}>
-            <a onClick={() => setCurrentPage(page)} className={page === currentPage ? "page-active" : ""}>{page}</a>
-          </li>
+        {[...Array(state.productParams._page + 6).keys()].slice(state.productParams._page).map(page => (
+          <PageLink page={page} key={page} />
         ))}
         <li>
           <a onClick={handleNextPage}>Next page</a>
