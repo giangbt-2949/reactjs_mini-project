@@ -1,16 +1,23 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { changePage } from "../../../redux/slices/productSlice";
 
 import './styles.scss';
 
-const Pagination = ({ setCurrentPage, currentPage }) => {
+const Pagination = () => {
   const [limitPageNum, setLimitPageNum] = useState(6);
 
+  const { productParams } = useSelector(state => state.products);
+  const dispatch = useDispatch();
+
   const handleNextPage = () => {
-    setCurrentPage(prevPage => prevPage + 1);
+    dispatch(changePage(productParams._page + 1));
   };
 
   const handlePrevPage = () => {
-    setCurrentPage(prevPage => prevPage - 1);
+    if (productParams._page > 1) {
+      dispatch(changePage(productParams._page - 1));
+    }
   };
 
   return (
@@ -20,9 +27,11 @@ const Pagination = ({ setCurrentPage, currentPage }) => {
           <i class="fa-solid fa-chevron-left"></i>
           <a onClick={handlePrevPage}>Previous page</a>
         </li>
-        {[...Array(currentPage + limitPageNum).keys()].slice(currentPage).map(page => (
+        {[...Array(productParams._page + limitPageNum).keys()].slice(productParams._page).map(page => (
           <li key={page}>
-            <a onClick={() => setCurrentPage(page)} className={page === currentPage ? "page-active" : ""}>{page}</a>
+            <a onClick={() => {
+              dispatch(changePage(page));
+            }} className={page === productParams._page ? "page-active" : ""}>{page}</a>
           </li>
         ))}
         <li>

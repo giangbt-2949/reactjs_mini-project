@@ -1,0 +1,17 @@
+@import '../../../sass/index.scss';
+
+.sort-price {
+  @include flexBox(row, center, flex-end);
+
+  margin: 0 10px;
+
+  label {
+    margin-top: 3px;
+    margin-right: 5px;
+    font-size: $fs-sm;
+  }
+
+  select {
+    padding: 1px 0;
+  }
+}

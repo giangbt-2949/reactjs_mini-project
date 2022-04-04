@@ -13,7 +13,7 @@ function App() {
         <div className="col-md-10">
           <Products />
         </div>
-      </div>
+      </div>  
     </div>
   );
 }
