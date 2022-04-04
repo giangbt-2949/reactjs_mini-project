@@ -6,10 +6,12 @@ import Product from "./Product/Product";
 import { getAllProducts, getProducts } from "../../redux/slices/productSlice";
 import SortPrice from "./SortPrice/SortPrice";
 
+import './styles.scss';
+
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { products, productParams } = useSelector(state => state.products);
+  const { products, productParams, isLoading, errorMess } = useSelector(state => state.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,7 +19,13 @@ const Products = () => {
     dispatch(getAllProducts(productParams));
   }, [productParams]);
 
-  console.log(products);
+  if(errorMess) {
+    return <div className="error">{errorMess}</div>
+  }
+
+  if(isLoading) {
+    return <div className="loading">Loading...</div>
+  }
 
   return (
     <div>

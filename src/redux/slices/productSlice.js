@@ -1,24 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getProducts = createAsyncThunk('products/getProducts', async (productParams) => {
+export const getProducts = createAsyncThunk('products/getProducts', async (params) => {
   const { data } = await axios.get('http://localhost:3000/products',
     {
-      params: productParams
+      params
     }
   );
 
-  console.log(productParams);
   return data;
 });
 
-export const getAllProducts = createAsyncThunk('allProducts/getAllProducts', async (productParams) => {
+export const getAllProducts = createAsyncThunk('allProducts/getAllProducts', async (params) => {
   const { data } = await axios.get('http://localhost:3000/products',
     {
       params: {
-        categories_like: productParams.categories_like,
-        _page: productParams._page,
-        _limit: productParams._limit,
+        categories_like: params.categories_like,
+        _page: params._page,
+        _limit: params._limit,
       }
     }
   );
@@ -32,10 +31,14 @@ export const productSlice = createSlice({
     productParams: {
       _page: 1,
       _limit: 16,
+      type: [],
+      brand: [],
     },
     products: [],
     allProducts: [],
-    currentLink: ''
+    currentLink: '',
+    isLoading: false,
+    errorMess: '',
   },
   reducers: {
     changePage: (state, action) => {
@@ -43,33 +46,20 @@ export const productSlice = createSlice({
         ...state.productParams,
         _page: action.payload
       };
-      console.log(state.productParams);
     },
 
     filterByCategory: (state, action) => {
       state.productParams = {
         categories_like: action.payload,
         _page: 1,
-        _limit: 16
+        _limit: 16,
+        type: [],
+        brand: [],
       }
-      console.log(state.productParams);
     },
 
     filterByType: (state, action) => {
-      if(state.productParams[action.payload.param]) {
-        state.productParams = {
-          ...state.productParams,
-          _page: 1,
-          [action.payload.param]: [...state.productParams[action.payload.param] ,action.payload.text],
-        }
-      } else {
-        state.productParams = {
-          ...state.productParams,
-          _page: 1,
-          [action.payload.param]: [action.payload.text],
-        }
-      }
-      console.log(state.productParams);
+      state.productParams[action.payload.param].push(action.payload.text);
     },
 
     filterByRating: (state, action) => {
@@ -78,7 +68,6 @@ export const productSlice = createSlice({
         _page: 1,
         rating_gte: action.payload,
       }
-      console.log(state.productParams);
     },
 
     filterByPrice: (state, action) => {
@@ -86,7 +75,6 @@ export const productSlice = createSlice({
         ...state.productParams,
         price_range: action.payload,
       }
-      console.log(state.productParams);
     },
 
     setCurrentLink: (state, action) => {
@@ -119,17 +107,29 @@ export const productSlice = createSlice({
 
   }, 
   extraReducers: {
-    [getProducts.pending]: (state, action) => {},
-    [getProducts.rejected]: (state, action) => {},
+    [getProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getProducts.rejected]: (state) => {
+      state.isLoading = false;
+      state.errorMess = 'Products not found!'
+    },
     [getProducts.fulfilled]: (state, action) => {
-      console.log('products',action.payload);
+      state.errorMess = '';
+      state.isLoading = false;
       state.products = action.payload;
     },
 
-    [getAllProducts.pending]: (state, action) => {},
-    [getAllProducts.rejected]: (state, action) => {},
+    [getAllProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllProducts.rejected]: (state) => {
+      state.isLoading = false;
+      state.errorMess = 'Products not found!'
+    },
     [getAllProducts.fulfilled]: (state, action) => {
-      console.log('allProducts',action.payload);
+      state.errorMess = '';
+      state.isLoading = false;
       state.allProducts = action.payload;
     },
   }
