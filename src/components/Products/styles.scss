@@ -1,0 +1,9 @@
+@import '../../sass/index.scss';
+
+.loading, .error {
+  @include flexBox(row, center, center);
+
+  height: 100vh;
+  font-size: $fs-xl;
+  font-weight: bold;
+}
